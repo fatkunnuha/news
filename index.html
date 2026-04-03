@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumpulan Doa Harian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#059669">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker terdaftar!', reg))
+        .catch(err => console.error('Registrasi gagal:', err));
+    });
+  }
+</script>
+
+
+    <style>
+        .arabic { font-family: 'Amiri', serif; font-size: 2rem; line-height: 1.6; }
+        body { font-family: 'Inter', sans-serif; }
+        .hidden-item { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-emerald-600 text-white py-8 shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl font-bold">Doa Harian Muslim</h1>
+            <p class="mt-2 opacity-90">Filter doa berdasarkan kebutuhan Anda</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10 max-w-3xl">
+        
+        <div class="mb-8">
+            <label for="categoryFilter" class="block text-sm font-medium text-slate-700 mb-2">Pilih Kategori:</label>
+            <select id="categoryFilter" onchange="filterDoa()" class="w-full p-3 rounded-lg border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm cursor-pointer">
+                <option value="semua">Semua Doa</option>
+                <option value="makan">Adab Makan</option>
+                <option value="tidur">Tidur & Bangun</option>
+                <option value="ibadah">Ibadah & Masjid</option>
+            </select>
+        </div>
+
+        <div id="doaContainer">
+            
+            <div class="doa-item bg-white rounded-xl shadow-sm p-6 mb-6 border-l-4 border-emerald-500" data-category="makan">
+                <h2 class="text-xl font-semibold mb-4 text-emerald-700">Doa Sebelum Makan</h2>
+                <div class="arabic text-right mb-4" dir="rtl">اَللّٰهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ</div>
+                <p class="italic text-slate-600 mb-2 text-sm">"Allahumma baarik lanaa fiimaa razaqtanaa wa qinaa 'adzaaban naar."</p>
+                <p class="text-slate-800"><span class="font-bold text-emerald-600 text-sm">Artinya:</span> Ya Allah, berkahilah kami dalam rezeki yang telah Engkau berikan dan peliharalah kami dari siksa neraka.</p>
+            </div>
+
+            <div class="doa-item bg-white rounded-xl shadow-sm p-6 mb-6 border-l-4 border-emerald-500" data-category="tidur">
+                <h2 class="text-xl font-semibold mb-4 text-emerald-700">Doa Bangun Tidur</h2>
+                <div class="arabic text-right mb-4" dir="rtl">اَلْحَمْدُ لِلّٰهِ الَّذِيْ أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُوْرُ</div>
+                <p class="italic text-slate-600 mb-2 text-sm">"Alhamdu lillahil ladzii ahyaanaa ba'da maa amaatanaa wa ilaihin nusyuur."</p>
+                <p class="text-slate-800"><span class="font-bold text-emerald-600 text-sm">Artinya:</span> Segala puji bagi Allah yang menghidupkan kami kembali setelah mematikan kami...</p>
+            </div>
+
+            <div class="doa-item bg-white rounded-xl shadow-sm p-6 mb-6 border-l-4 border-emerald-500" data-category="ibadah">
+                <h2 class="text-xl font-semibold mb-4 text-emerald-700">Doa Masuk Masjid</h2>
+                <div class="arabic text-right mb-4" dir="rtl">اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ</div>
+                <p class="italic text-slate-600 mb-2 text-sm">"Allahummaftahlii abwaaba rahmatik."</p>
+                <p class="text-slate-800"><span class="font-bold text-emerald-600 text-sm">Artinya:</span> Ya Allah, bukakanlah bagiku pintu-pintu rahmat-Mu.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function filterDoa() {
+            const dropdown = document.getElementById('categoryFilter');
+            const selectedValue = dropdown.value;
+            const items = document.getElementsByClassName('doa-item');
+
+            for (let i = 0; i < items.length; i++) {
+                const itemCategory = items[i].getAttribute('data-category');
+                
+                if (selectedValue === "semua" || itemCategory === selectedValue) {
+                    items[i].classList.remove('hidden-item');
+                } else {
+                    items[i].classList.add('hidden-item');
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
